@@ -1,8 +1,8 @@
 from airflow.sdk import dag, task
 
 
-@dag(dag_id="xcoms_dag_manual")
-def xcoms_dag_manual(**kwargs):
+@dag(dag_id="xcoms_dag_kwargs")
+def xcoms_dag_kwargs(**kwargs):
     @task.python
     def first_task():
         # Extracting "ti" from kwargs to push data to XComs manually
@@ -29,9 +29,9 @@ def xcoms_dag_manual(**kwargs):
 
     # Defining task dependencies
     first = first_task()
-    second = second_task(first)
-    third = third_task(second)
+    second = second_task()
+    third = third_task()
 
 
 # Running the DAG
-xcoms_dag_manual()
+xcoms_dag_kwargs()
